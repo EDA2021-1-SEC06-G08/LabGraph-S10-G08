@@ -21,10 +21,10 @@
  * Contribución de:
  *
  * Dario Correal
- *
+ 
  """
 
-
+import tracemalloc
 import sys
 import config
 import threading
@@ -83,7 +83,7 @@ def optionThree(cont):
 
 
 def optionFour(cont, initialStation):
-    controller.minimumCostPaths(cont, initialStation)
+    respuesta = controller.minimumCostPaths(cont, initialStation)
 
 
 def optionFive(cont, destStation):
@@ -135,7 +135,8 @@ def thread_cycle():
         elif int(inputs[0]) == 4:
             msg = "Estación Base: BusStopCode-ServiceNo (Ej: 75009-10): "
             initialStation = input(msg)
-            optionFour(cont, initialStation)
+            respuesta = optionFour(cont, initialStation)
+            print("Tiempo [ms]: " + str(respuesta[1]))
 
         elif int(inputs[0]) == 5:
             destStation = input("Estación destino (Ej: 15151-10): ")

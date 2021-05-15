@@ -23,7 +23,7 @@
  * Dario Correal
  *
  """
-
+import time
 import config as cf
 from App import model
 import csv
@@ -111,7 +111,16 @@ def minimumCostPaths(analyzer, initialStation):
     Calcula todos los caminos de costo minimo de initialStation a todas
     las otras estaciones del sistema
     """
-    return model.minimumCostPaths(analyzer, initialStation)
+    delta_time = -1.0
+
+    start_time = getTime()
+
+    respuesta = model.minimumCostPaths(analyzer, initialStation)
+
+    stop_time = getTime()
+
+    delta_time = stop_time - start_time
+    return respuesta, delta_time
 
 
 def hasPath(analyzer, destStation):
@@ -134,3 +143,9 @@ def servedRoutes(analyzer):
     """
     maxvert, maxdeg = model.servedRoutes(analyzer)
     return maxvert, maxdeg
+
+def getTime():
+    """
+    devuelve el instante tiempo de procesamiento en milisegundos
+    """
+    return float(time.perf_counter()*1000)
