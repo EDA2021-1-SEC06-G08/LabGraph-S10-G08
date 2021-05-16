@@ -83,24 +83,25 @@ def optionThree(cont):
 
 
 def optionFour(cont, initialStation):
-    respuesta = controller.minimumCostPaths(cont, initialStation)
+    return controller.minimumCostPaths(cont, initialStation)
 
 
 def optionFive(cont, destStation):
-    haspath = controller.hasPath(cont, destStation)
     print('Hay camino entre la estación base : ' +
           'y la estación: ' + destStation + ': ')
-    print(haspath)
+    return controller.hasPath(cont, destStation)
 
 
 def optionSix(cont, destStation):
-    path = controller.minimumCostPath(cont, destStation)
+    respuesta = controller.minimumCostPath(cont, destStation)
+    path = respuesta[1]
     if path is not None:
         pathlen = stack.size(path)
         print('El camino es de longitud: ' + str(pathlen))
         while (not stack.isEmpty(path)):
             stop = stack.pop(path)
             print(stop)
+        print("Tiempo [ms]: " + str(respuesta[0]))
     else:
         print('No hay camino')
 
@@ -136,11 +137,11 @@ def thread_cycle():
             msg = "Estación Base: BusStopCode-ServiceNo (Ej: 75009-10): "
             initialStation = input(msg)
             respuesta = optionFour(cont, initialStation)
-            print("Tiempo [ms]: " + str(respuesta[1]))
+            print("Tiempo [ms]: " + str(respuesta[0]))
 
         elif int(inputs[0]) == 5:
             destStation = input("Estación destino (Ej: 15151-10): ")
-            optionFive(cont, destStation)
+            respuesta = optionFive(cont, destStation)
 
         elif int(inputs[0]) == 6:
             destStation = input("Estación destino (Ej: 15151-10): ")

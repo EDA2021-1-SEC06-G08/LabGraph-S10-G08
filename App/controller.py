@@ -120,21 +120,32 @@ def minimumCostPaths(analyzer, initialStation):
     stop_time = getTime()
 
     delta_time = stop_time - start_time
-    return respuesta, delta_time
+
+    return delta_time, respuesta
 
 
 def hasPath(analyzer, destStation):
     """
     Informa si existe un camino entre initialStation y destStation
     """
-    return model.hasPath(analyzer, destStation)
-
+    return  model.hasPath(analyzer, destStation)
 
 def minimumCostPath(analyzer, destStation):
     """
     Retorna el camino de costo minimo desde initialStation a destStation
     """
-    return model.minimumCostPath(analyzer, destStation)
+
+    delta_time = -1.0
+
+    start_time = getTime()
+
+    respuesta = model.minimumCostPath(analyzer, destStation)
+
+    stop_time = getTime()
+
+    delta_time = stop_time - start_time
+
+    return delta_time, respuesta
 
 
 def servedRoutes(analyzer):
